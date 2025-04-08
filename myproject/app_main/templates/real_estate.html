@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Jak inwestować w nieruchomości w 2024 roku?</h1>
+
+    <h2 class="mb-3">Jak zacząć?</h2>
+    <p>
+        Inwestowanie w nieruchomości w 2024 roku stanowi fascynującą perspektywę dla wielu osób poszukujących stabilnych i rentownych form lokowania kapitału.
+        Rynek nieruchomości, ze swoją nieustanną dynamiką i różnorodnością możliwości, przyciąga zarówno doświadczonych inwestorów, jak i tych, którzy dopiero
+        rozważają swoje pierwsze kroki w tej dziedzinie. Rozpoczęcie przygody z inwestowaniem w nieruchomości może wydawać się wyzwaniem, lecz odpowiednia
+        wiedza i strategia mogą otworzyć drzwi do znaczących zysków i długoterminowej stabilności finansowej.
+    </p>
+
+    <h2 class="mt-5 mb-3">Czym jest inwestowanie w nieruchomości?</h2>
+    <p>
+        Inwestowanie w nieruchomości to proces lokowania kapitału w celu generowania zysku, który może przybierać różne formy – od wynajmu długoterminowego
+        po szybką sprzedaż. Jest to forma inwestowania przyciągająca zarówno doświadczonych, jak i początkujących inwestorów, oferując możliwość osiągania
+        stałego dochodu z najmu oraz potencjał wzrostu wartości nieruchomości. Decyzja o zakupie nieruchomości wymaga analizy wielu czynników, takich jak
+        lokalizacja, standard lokalu, a także przewidywania dotyczące rynku mieszkaniowego.
+    </p>
+
+    <h2 class="mt-5 mb-3">Dlaczego warto zacząć inwestować w nieruchomości w 2024 roku?</h2>
+    <p>
+        Rozpoczęcie inwestowania w nieruchomości w 2024 roku może okazać się strategicznym posunięciem, szczególnie w kontekście nieruchomości pod wynajem
+        i sprzedaży nieruchomości. Dzięki stabilizacji cen na rynku, inwestycja w nieruchomości staje się atrakcyjna z kilku powodów. Po pierwsze,
+        nieruchomości w Polsce nadal cieszą się rosnącym popytem, zarówno wśród osób szukających mieszkań na wynajem, jak i tych, którzy poszukują mieszkań
+        na sprzedaż.
+    </p>
+
+    <h2 class="mt-5 mb-3">W jaki rodzaj nieruchomości inwestować?</h2>
+    <p>
+        Decydując się na inwestowanie na rynku nieruchomości, warto rozważyć kilka opcji, które mogą dostosować się do indywidualnych preferencji, możliwości
+        finansowych oraz celów inwestycyjnych. Oto warianty, w które warto zainwestować:
+    </p>
+    <ul>
+        <li>Nieruchomości na własne potrzeby mieszkaniowe</li>
+        <li>Nieruchomości pod wynajem długoterminowy</li>
+        <li>Nieruchomości na wynajem krótkoterminowy</li>
+        <li>Podnajem nieruchomości</li>
+        <li>Nieruchomości komercyjne</li>
+        <li>Zakup nieruchomości w celu wykończenia i odsprzedaży</li>
+    </ul>
+
+    <h2 class="mt-5 mb-3">Co przyniesie rok 2025 na rynku nieruchomości?</h2>
+    <p>
+        Rok 2025 na rynku nieruchomości zapowiada się jako czas dynamicznych zmian i nowych możliwości dla inwestorów. Analitycy przewidują, że tendencje
+        wzrostowe wartości nieruchomości będą kontynuowane, zwłaszcza w segmentach premium i nieruchomości komercyjnych, co stwarza perspektywy dla
+        zyskownych inwestycji.
+    </p>
+</div>
+<div class="container mt-4">
+    <h1 class="text-center">Porównanie cen nieruchomości</h1>
+
+    <!-- Filtr miasta -->
+    <div class="text-center mb-4">
+        <form method="get">
+            <label for="city">Wybierz lokalizację:</label>
+            <select id="city" name="city" onchange="this.form.submit()">
+                <option value="Polska" {% if city == "Polska" %}selected{% endif %}>Polska</option>
+                <option value="Bydgoszcz" {% if city == "Bydgoszcz" %}selected{% endif %}>Bydgoszcz</option>
+                <option value="Gdańsk" {% if city == "Gdańsk" %}selected{% endif %}>Gdańsk</option>
+                <option value="Lublin" {% if city == "Lublin" %}selected{% endif %}>Lublin</option>
+                <option value="Łódź" {% if city == "Łódź" %}selected{% endif %}>Łódź</option>
+                <option value="Katowice" {% if city == "Katowice" %}selected{% endif %}>Katowice</option>
+                <option value="Kraków" {% if city == "Kraków" %}selected{% endif %}>Kraków</option>
+                <option value="Poznań" {% if city == "Poznań" %}selected{% endif %}>Poznań</option>
+                <option value="Szczecin" {% if city == "Szczecin" %}selected{% endif %}>Szczecin</option>
+                <option value="Warszawa" {% if city == "Warszawa" %}selected{% endif %}>Warszawa</option>
+                <option value="Wrocław" {% if city == "Wrocław" %}selected{% endif %}>Wrocław</option>
+            </select>
+        </form>
+    </div>
+    <!-- Tabela -->
+    <h2 class="mt-4">Dane tabelaryczne</h2>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th rowspan="2">Rok</th>
+                <th colspan="2">Rynek pierwotny</th>
+                <th colspan="2">Rynek wtórny</th>
+            </tr>
+            <tr>
+                <th>Ceny ofertowe</th>
+                <th>Ceny transakcyjne</th>
+                <th>Ceny ofertowe</th>
+                <th>Ceny transakcyjne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+            <tr>
+                <td>{{ row.Rok }}</td>
+                <td>{{ row.Cena_ofertowa_pierwotny }}</td>
+                <td>{{ row.Cena_transakcyjna_pierwotny }}</td>
+                <td>{{ row.Cena_ofertowa_wtorny }}</td>
+                <td>{{ row.Cena_transakcyjna_wtorny }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Wykres -->
+    <h2 class="mt-4">Wykres porównawczy</h2>
+    <div class="text-center">
+        <img src="data:image/png;base64,{{ graph }}" alt="Wykres cen nieruchomości" class="img-fluid">
+    </div>
+</div>
+{% endblock %}
+

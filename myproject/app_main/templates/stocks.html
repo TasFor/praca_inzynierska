@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Akcje Giełdowe z USA</h1>
+    <p>Wybierz okres, aby zobaczyć zmiany cen akcji w wybranym czasie:</p>
+
+    <!-- Wybierz okres -->
+    <form method="get" class="mb-4">
+        <label for="period" class="form-label">Okres:</label>
+        <select name="period" id="period" class="form-select" onchange="this.form.submit()">
+            <option value="15m" {% if period == '15m' %}selected{% endif %}>15 minut</option>
+            <option value="60m" {% if period == '60m' %}selected{% endif %}>1 godzina</option>
+            <option value="1d" {% if period == '1d' %}selected{% endif %}>24 godziny</option>
+            <option value="5d" {% if period == '5d' %}selected{% endif %}>5 dni</option>
+            <option value="1mo" {% if period == '1mo' %}selected{% endif %}>1 miesiąc</option>
+            <option value="3mo" {% if period == '3mo' %}selected{% endif %}>3 miesiące</option>
+            <option value="6mo" {% if period == '6mo' %}selected{% endif %}>6 miesięcy</option>
+            <option value="1y" {% if period == '1y' %}selected{% endif %}>12 miesięcy</option>
+        </select>
+    </form>
+
+    <!-- Tabela akcji -->
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Symbol</th>
+                <th>Nazwa</th>
+                <th>Aktualna Cena ($)</th>
+                <th>Cena z Wybranego Okresu ($)</th>
+                <th>Zmiana (%)</th>
+                <th>Cena Najniższa ($)</th>
+                <th>Cena Najwyższa ($)</th>
+                <th>Wolumen</th>
+                <th>Obrót ($)</th>
+                <th>Liczba Transakcji</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.current_price|floatformat:2 }}</td>
+                <td>
+                    {% if stock.past_price %}
+                        {{ stock.past_price|floatformat:2 }}
+                    {% else %}
+                        Brak danych
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stock.change is not None %}
+                        <span class="{% if stock.change > 0 %}text-success{% elif stock.change < 0 %}text-danger{% else %}text-muted{% endif %}">
+                            {{ stock.change|floatformat:2 }}
+                        </span>
+                    {% else %}
+                        Brak danych
+                    {% endif %}
+                </td>
+                <td>{{ stock.low_price|floatformat:2 }}</td>
+                <td>{{ stock.high_price|floatformat:2 }}</td>
+                <td>{{ stock.volume }}</td>
+                <td>{{ stock.turnover|floatformat:2 }}</td>
+                <td>{{ stock.num_transactions }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

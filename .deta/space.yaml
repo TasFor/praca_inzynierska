@@ -1,0 +1,3 @@
+name: Real Estate App
+runtime: python3.11
+entrypoint: web:gunicorn myproject.wsgi
